@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ export class LoginPage implements OnInit {
   message:string ='';
   
   constructor(private router: Router,
-             
+              private authService:AuthService,
               private toastController:ToastController ) { }
   formData:any = {}
   
@@ -24,6 +25,19 @@ export class LoginPage implements OnInit {
       password: this.formData.password
     };
 
+    this.authService.loginUser(credentials).subscribe(
+      (response) => {
+        // this.authService.loginUser(response.user).then(res=>{
+        // })
+        this.router.navigate(['/rooms']); 
+      },
+      (error) => {
+        console.log(error);
+        
+        const message = error?.error?.error;
+        this.presentToast(message);
+      }
+    );
   
 }
 
