@@ -1,0 +1,27 @@
+<ion-content class="ion-padding">
+  <div class="login-container">
+    <form (ngSubmit)="login()" class="login-form">
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" [(ngModel)]="formData.email" name="email" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" [(ngModel)]="formData.password" name="password" required></ion-input>
+      </ion-item>
+      
+      <ion-button expand="full" 
+              color="primary"
+              type="submit" 
+              class="login-button"
+              [disabled]="!formData.email || !formData.password">
+        Log in
+      </ion-button>
+    </form>
+
+    <div class="register-link">
+      You do not have an account? <ion-router-link routerLink="/register">Sign up</ion-router-link>
+    </div>
+  </div>
+</ion-content>
