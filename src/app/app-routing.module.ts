@@ -20,6 +20,10 @@ const routes: Routes = [
     path: 'rooms',
     loadChildren: () => import('./pages/rooms/rooms.module').then( m => m.RoomsPageModule),canActivate: [AuthGuard]
   },
+  {
+    path: 'chat/:roomId',
+    loadChildren: () => import('./pages/chat/chat.module').then( m => m.ChatPageModule),canActivate: [AuthGuard]
+  },
 ];
 
 @NgModule({
