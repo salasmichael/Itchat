@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,8 @@ export class LoginPage implements OnInit {
   
   constructor(private router: Router,
               private authService:AuthService,
-              private toastController:ToastController ) { }
+              private toastController:ToastController,
+              private storageService:StorageService ) { }
   formData:any = {}
   
   ngOnInit() {
@@ -27,9 +29,9 @@ export class LoginPage implements OnInit {
 
     this.authService.loginUser(credentials).subscribe(
       (response) => {
-        // this.authService.loginUser(response.user).then(res=>{
-        // })
-        this.router.navigate(['/rooms']); 
+        this.storageService.loginUser(response.data).then(res=>{
+          this.router.navigate(['/rooms']); 
+        })
       },
       (error) => {
         console.log(error);
