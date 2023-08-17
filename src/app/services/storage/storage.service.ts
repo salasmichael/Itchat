@@ -11,7 +11,7 @@ export class StorageService {
 
   constructor(private storage: Storage) {}
 
-  async loginUser(userInfo: any) {
+  async setUser(userInfo: any) {
     await this.storage.create();
     this.storage.set('user', userInfo);
     this.userLoggedIn = true;

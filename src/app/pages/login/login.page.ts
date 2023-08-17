@@ -29,14 +29,12 @@ export class LoginPage implements OnInit {
 
     this.authService.loginUser(credentials).subscribe(
       (response) => {
-        this.storageService.loginUser(response.data).then(res=>{
+        this.storageService.setUser(response.data).then(res=>{
           this.router.navigate(['/rooms']); 
         })
       },
       (error) => {
-        console.log(error);
-        
-        const message = error?.error?.error;
+        const message = error?.error?.message;
         this.presentToast(message);
       }
     );
