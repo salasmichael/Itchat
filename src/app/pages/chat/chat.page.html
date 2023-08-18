@@ -1,7 +1,7 @@
 
 <app-header pageTitle="Chat" [backButton]="true" ></app-header>
 
-<ion-content #content [scrollEvents]="true" (ionScroll)="scrollToBottom()">
+<ion-content #content [scrollEvents]="true" (ionScroll)="handleScroll($event)">
   <ion-grid>
     <ion-row *ngFor="let message of messages">
       <ion-col size="9" *ngIf="message.from != nickname" class="message" [ngClass]="{'my_message': message.from == nickname, 'other_message': message.from != nickname}">

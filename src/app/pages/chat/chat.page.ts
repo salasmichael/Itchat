@@ -11,7 +11,8 @@ import { StorageService } from 'src/app/services/storage/storage.service';
 })
 export class ChatPage implements OnInit {
 
-  @ViewChild(IonContent, { static: false }) content: IonContent | undefined;
+  @ViewChild(IonContent, { static: true }) content: IonContent | undefined;
+  scrollingDown = false;
 
   messages:any = [];
   nickname = '';
@@ -29,6 +30,10 @@ export class ChatPage implements OnInit {
     this.receiveMessages();
   }
 
+  handleScroll(event: any) {
+    this.scrollingDown = event.detail.scrollTop > event.detail.scrollHeight - event.detail.contentHeight - 100;
+  }
+
   receiveMessages(){
     this.chatService.receiveMessages(this.roomId).subscribe((msg) => {
       this.messages.push(msg);
@@ -36,9 +41,11 @@ export class ChatPage implements OnInit {
   }
 
   sendMessage() {
-    this.scrollToBottom();
     this.chatService.sendMessage(this.roomId,this.UserLogged?.id,this.message);
     this.message = '';
+    if (this.content) {
+      this.content.scrollToBottom();
+    }
   }
 
   userLoggedIn(){
