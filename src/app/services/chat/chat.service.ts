@@ -8,11 +8,11 @@ import { io } from 'socket.io-client';
 })
 export class ChatService {
 
-  private baseUrl = environment.baseUrl;
+  private socketUrl = environment.socketUrl;
   private socket: any;
 
   constructor() {
-    this.socket = io(this.baseUrl);
+    this.socket = io(this.socketUrl);
   }
 
   sendMessage( roomId: number, userId:number, nickname:string, message: string ) {
