@@ -15,14 +15,15 @@ export class ChatService {
     this.socket = io(this.socketUrl);
   }
 
-  sendMessage( roomId: number, userId:number, nickname:string, message: string ) {
+  sendMessage( roomId: number, userId:number, message: string ) {
     this.socket.connect();
-    this.socket.emit('set-nickname', nickname);
     this.socket.emit('add-message', { text: message, user_id:userId, room_id: roomId });
   }
 
-  receiveMessages(): Observable<any> {
+  receiveMessages(room_id:number): Observable<any> {
     return new Observable((observer) => {
+      this.socket.connect();
+      this.socket.emit('set-roomId', room_id);
       this.socket.on('message', (message: any) => {
         observer.next(message);
       });

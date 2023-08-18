@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { RoomsPageRoutingModule } from './rooms-routing.module';
 
 import { RoomsPage } from './rooms.page';
+import { ComponentModule } from "../../components/component.module";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RoomsPageRoutingModule
-  ],
-  declarations: [RoomsPage]
+    declarations: [RoomsPage],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        RoomsPageRoutingModule,
+        ComponentModule
+    ]
 })
 export class RoomsPageModule {}

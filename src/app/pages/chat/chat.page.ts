@@ -30,14 +30,14 @@ export class ChatPage implements OnInit {
   }
 
   receiveMessages(){
-    this.chatService.receiveMessages().subscribe((msg) => {
+    this.chatService.receiveMessages(this.roomId).subscribe((msg) => {
       this.messages.push(msg);
     });
   }
 
   sendMessage() {
     this.scrollToBottom();
-    this.chatService.sendMessage(this.roomId,this.UserLogged?.id,this.UserLogged?.name,this.message);
+    this.chatService.sendMessage(this.roomId,this.UserLogged?.id,this.message);
     this.message = '';
   }
 
